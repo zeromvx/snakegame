@@ -1,0 +1,22 @@
+html,
+body {
+	padding: 0;
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #ddd;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+canvas {
+	background: black;
+	margin: 0 auto;
+}
