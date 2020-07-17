@@ -1,13 +1,12 @@
 const canv = document.getElementById("canvas"); // canvas
 const ctx = canv.getContext("2d"); // 2d context
-const scoreBox = document.querySelector('.score');
+const scoreBox = document.querySelector(".score");
 
 const appleImg = new Image(32, 32);
 appleImg.src = "img/apple.png";
 
 let boxSize = 32; // width & height 1 cell
 let score = 0;
-
 
 let xv = 0; // x motion
 let yv = 0; // y motion
@@ -24,10 +23,8 @@ snake[0] = {
 	y: Math.floor(canv.clientHeight / 2),
 };
 
-
 document.addEventListener("keydown", changeDirection);
 let game = setInterval(drawGame, 100); // 30 fps
-
 
 function drawGame() {
 	// canvas settings
@@ -40,7 +37,7 @@ function drawGame() {
 	updateSnakeCoords();
 }
 
-// function for updating snake coords. 
+// function for updating snake coords.
 // if apple not eaten, delete elem of snake array from end and add new element to start
 // if apple eaten, don`t delete elem and add new elem to start
 // snake moves cuz we delete and add end and
@@ -75,7 +72,7 @@ function updateSnakeCoords() {
 	if (snakeX == apple.x && snakeY == apple.y) {
 		score++;
 		updateAppleCoords();
-		
+		scoreBox.innerHTML = score; // updating scoreBox
 	} else {
 		snake.pop();
 	}
@@ -86,7 +83,6 @@ function updateSnakeCoords() {
 	};
 
 	checkTailEat(newSnakeHead, snake);
-
 
 	snake.unshift(newSnakeHead);
 }
@@ -99,7 +95,7 @@ function updateAppleCoords() {
 
 function checkTailEat(head, body) {
 	for (let i = 0; i < body.length; i++) {
-		if ( head.x == body[i].x && head.y == body[i].y) {
+		if (head.x == body[i].x && head.y == body[i].y) {
 			clearInterval(game);
 		}
 	}
