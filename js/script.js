@@ -1,5 +1,6 @@
 const canv = document.getElementById("canvas"); // canvas
 const ctx = canv.getContext("2d"); // 2d context
+const scoreBox = document.querySelector('.score');
 
 const appleImg = new Image(32, 32);
 appleImg.src = "img/apple.png";
@@ -23,10 +24,10 @@ snake[0] = {
 	y: Math.floor(canv.clientHeight / 2),
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-	document.addEventListener("keydown", changeDirection);
-	setInterval(drawGame, 100); // 30 fps
-});
+
+document.addEventListener("keydown", changeDirection);
+let game = setInterval(drawGame, 100); // 30 fps
+
 
 function drawGame() {
 	// canvas settings
@@ -55,12 +56,12 @@ function updateSnakeCoords() {
 		snakeX = 0;
 	}
 	if (snakeY > canv.clientHeight) {
-		snakeY = 32;
+		snakeY = 0;
 	}
 	if (snakeX < 0) {
 		snakeX = canv.clientWidth;
 	}
-	if (snakeY < 32) {
+	if (snakeY < 0) {
 		snakeY = canv.clientHeight;
 	}
 
@@ -74,6 +75,7 @@ function updateSnakeCoords() {
 	if (snakeX == apple.x && snakeY == apple.y) {
 		score++;
 		updateAppleCoords();
+		
 	} else {
 		snake.pop();
 	}
@@ -84,6 +86,7 @@ function updateSnakeCoords() {
 	};
 
 	checkTailEat(newSnakeHead, snake);
+
 
 	snake.unshift(newSnakeHead);
 }
@@ -97,7 +100,7 @@ function updateAppleCoords() {
 function checkTailEat(head, body) {
 	for (let i = 0; i < body.length; i++) {
 		if ( head.x == body[i].x && head.y == body[i].y) {
-			clearInterval(drawGame);
+			clearInterval(game);
 		}
 	}
 }
