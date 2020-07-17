@@ -25,7 +25,7 @@ snake[0] = {
 };
 
 document.addEventListener("keydown", changeDirection);
-let game = setInterval(drawGame, 1000 / 8); // 30 fps
+let game = setInterval(drawGame, 1000 / 12.5); // 30 fps
 
 function drawGame() {
 	// canvas settings
@@ -33,7 +33,7 @@ function drawGame() {
 	ctx.fillRect(0, 0, canv.clientWidth, canv.clientHeight);
 
 	// drawing apple
-	ctx.fillStyle = "red";
+	ctx.fillStyle = "#ff7979";
 	ctx.fillRect(
 		apple.x * cellsCount,
 		apple.y * cellsCount,
@@ -76,7 +76,7 @@ function updateSnakeCoords() {
 	// for drawing snake we snake`s coords multiply on area`s cells count
 	// snake`s cell size is cellSize - 2 needs for some distance between cells
 	for (let i = 0; i < snake.length; i++) {
-		ctx.fillStyle = "grey";
+		ctx.fillStyle = "#7ac57c";
 		ctx.fillRect(
 			snake[i].x * cellsCount,
 			snake[i].y * cellsCount,
@@ -89,7 +89,7 @@ function updateSnakeCoords() {
 	if (snakeX == apple.x && snakeY == apple.y) {
 		score++;
 		updateAppleCoords();
-		scoreBox.innerHTML = score; // updating scoreBox
+		scoreBox.innerHTML = `Score: ${score}`; // updating scoreBox
 	} else {
 		snake.pop();
 	}
@@ -114,6 +114,10 @@ function checkTailEat(head, body) {
 	for (let i = 0; i < body.length; i++) {
 		if (head.x == body[i].x && head.y == body[i].y) {
 			clearInterval(game);
+			ctx.fillStyle = 'black';
+			ctx.font = "24px Open-Sans";
+			ctx.fillText('Game over', 7 * cellsCount, 9.5 * cellsCount);
+			ctx.fillText(`Your score: ${score}`, 6.5 * cellsCount, 11 * cellsCount);
 		}
 	}
 }
