@@ -52,7 +52,7 @@ function drawApple() {
 // drawing snake
 // snake coords is 0 - 19 for x and y axis`s.
 // we have area 400x400. every update we get new snake`s coords, that changed on 1
-// for drawing snake we snake`s coords multiply on area`s cells count
+// for drawing snake we multiply snake`s coords  on area`s cells count
 // snake`s cell size is (cellSize - 2) needs for some distance between cells
 function drawSnake() {
 	
